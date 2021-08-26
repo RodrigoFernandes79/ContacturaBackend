@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
+@Entity(name="user")
 public class ContacturaUser {
 	
 	@Id
@@ -21,6 +21,6 @@ public class ContacturaUser {
 	private String name;
 	private String username;
 	private String password;
-	private Boolean admin;
+	private boolean admin;
 
 }

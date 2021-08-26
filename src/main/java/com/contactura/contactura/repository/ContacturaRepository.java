@@ -7,5 +7,5 @@ import com.contactura.contactura.model.Contactura;
 
 @Repository
 public interface ContacturaRepository extends JpaRepository<Contactura, Long> {
-
+	
 }

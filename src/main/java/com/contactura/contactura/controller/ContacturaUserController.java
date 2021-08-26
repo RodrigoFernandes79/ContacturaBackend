@@ -53,7 +53,7 @@ public class ContacturaUserController {
 						record.setName(contacturaUser.getName());
 						record.setUsername(contacturaUser.getUsername());
 						record.setPassword(contacturaUser.getPassword());
-						record.setAdmin(contacturaUser.getAdmin());
+						record.setAdmin(contacturaUser.isAdmin());
 						ContacturaUser update =repository.save(record);
 						return ResponseEntity.ok().body(update);
 						
