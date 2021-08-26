@@ -18,13 +18,13 @@ public class ContacturaService {
 	}
 
 	public String deleteById(Long id) throws Exception {
-		this.findById(id).orElseThrow(() -> new NullPointerException("Contato_inexistente"));
+		this.findById(id).orElseThrow(() -> new NullPointerException("Contato inexistente"));
 		this.repository.deleteById(id);
 		Optional<Contactura> contact = this.findById(id);
 		if(contact.isPresent()){
-			throw new Exception("Não foi possível deletar contato");
+			throw new Exception("Ocorreu um erro... contato não deletado");
 		}
-		return "Contato deletado";
+		return "Contato deletado com Sucesso!";
 	}
 }
 

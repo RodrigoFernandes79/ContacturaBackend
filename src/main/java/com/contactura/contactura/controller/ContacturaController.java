@@ -1,12 +1,12 @@
 package com.contactura.contactura.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,17 +17,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.contactura.contactura.model.Contactura;
+import com.contactura.contactura.model.ContacturaUser;
 import com.contactura.contactura.repository.ContacturaRepository;
+import com.contactura.contactura.repository.ContacturaUserRepository;
 import com.contactura.contactura.service.ContacturaService;
 
+
 @RestController
-@RequestMapping({"/contactura"}) //http://localhost:8090/contactura
+@RequestMapping({ "/contactura" }) // http://localhost:8090/contactura
 public class ContacturaController {
-	
+
 	@Autowired
 	private ContacturaRepository repository;
 	@Autowired
 	private ContacturaService service;
+
+	@Autowired
+	private ContacturaUserRepository userRepository;
+
 
 	// List ALL - //http://localhost:8090/contactura
 	@GetMapping
@@ -35,7 +42,7 @@ public class ContacturaController {
 		return repository.findAll();
 	}
 
-	// Find By id - //http://localhost:8090/contactura/{id}
+	// Find By Id - //http://localhost:8090/contactura/{id}
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> findById(@PathVariable long id) {
 		return repository.findById(id).map(record -> ResponseEntity.ok().body(record))
@@ -71,4 +78,15 @@ public class ContacturaController {
 			return new ResponseEntity<String>("Error: " + e.getMessage(), HttpStatus.LOCKED);
 		}
 	}
+
+	
+	@GetMapping("/joinQuery")
+    public List<?> getQuery()
+    {
+		List  list = userRepository.listarTodos();
+		list.addAll(repository.listarTodos());
+        return list;
+    }
+
+
 }
